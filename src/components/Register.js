@@ -1,10 +1,19 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
   const emailRef = useRef(null);
+  const fnameRef = useRef(null);
+  const lnameRef = useRef(null);
 
   function handleSubmit(event) {
     event.preventDefault();
+    navigate("/confirmed", 
+    {state: { email: emailRef.current.value, 
+              fname: fnameRef.current.value, 
+              lname: lnameRef.current.value 
+    } });
   }
 
   return (
@@ -16,6 +25,14 @@ export default function Register() {
         technology solutions and events that connect the world.
       </p>
       <form onSubmit={handleSubmit}>
+        <label>
+          First Name:
+          <input type="text" name="fname" ref={fnameRef} />
+        </label>
+        <label>
+          Last Name:
+          <input type="text" name="lname" ref={lnameRef} />
+        </label>
         <label>
           Email:
           <input type="text" name="email" ref={emailRef} />
